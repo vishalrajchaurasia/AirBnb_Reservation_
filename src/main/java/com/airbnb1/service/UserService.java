@@ -1,18 +1,23 @@
 package com.airbnb1.service;
 
+import com.airbnb1.dto.LoginDto;
 import com.airbnb1.dto.PropertyUserDto;
 import com.airbnb1.entity.PropertyUser;
 import com.airbnb1.repository.PropertyUserRepository;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     private PropertyUserRepository userRepository;
     //now do constructor based injection
-    public UserService(PropertyUserRepository userRepository) {
-        this.userRepository = userRepository;
+    private JWTService jwtService;
 
+    public UserService(PropertyUserRepository userRepository, JWTService jwtService) {
+        this.userRepository = userRepository;
+        this.jwtService = jwtService;
     }
     public PropertyUser addUser(PropertyUserDto propertyUserDto){
         //we need to save the password
@@ -29,4 +34,16 @@ public class UserService {
         return savedUser;
     }
 
+    public String verifyLogin(LoginDto loginDto) {//actual value get from database//this is coming from user
+        Optional<PropertyUser> opUser =userRepository.findByUsername(loginDto.getUserName());
+        // weather the record is found or not if record is found then data present in it opUser,if not found it will be null.
+        if(opUser.isPresent()){//here avoid the null pointer exception is handle now
+            PropertyUser propertyUser = opUser.get(); //this is coming from database
+            if(BCrypt.checkpw(loginDto.getPassword(),propertyUser.getPassword())){//this check password return boolean value
+                return jwtService.generateToken(propertyUser);
+            }
+        }
+        return null;
+
+    }
 }
