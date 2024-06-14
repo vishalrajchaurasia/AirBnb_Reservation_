@@ -23,7 +23,7 @@ public class JWTService {
     // i want to inject the value in it.hardcoding value is injected a create a problem
 
     private final static String USER_NAME="username";
-    @PostConstruct //what is postConstruct annotaion does when you start appliaction it will start automatically
+    @PostConstruct //what is postConstruct annotation does when you start application it will start automatically
     public void  postConstruct(){
         algorithm = Algorithm.HMAC256(algorithmKey);
 
