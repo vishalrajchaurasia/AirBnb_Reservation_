@@ -1,5 +1,6 @@
 package com.airbnb1.controller;
 
+import com.airbnb1.dto.LoginDto;
 import com.airbnb1.dto.PropertyUserDto;
 import com.airbnb1.entity.PropertyUser;
 import com.airbnb1.service.UserService;
@@ -27,4 +28,15 @@ public class UserController {
         }
         return new ResponseEntity<>("Something went Wrong ", HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
+        String token = userService.verifyLogin(loginDto);
+        if (token!=null) {
+            return new ResponseEntity<>( token,HttpStatus.OK);
+        }
+        return new ResponseEntity<>("in valid credentials ",HttpStatus.UNAUTHORIZED);
+    }
+//Note-After return a token 2nd time at subsequent request that i make it should first validate a token and only then process the request how do we do this now
+
 }
+
