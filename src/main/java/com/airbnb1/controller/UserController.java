@@ -2,6 +2,7 @@ package com.airbnb1.controller;
 
 import com.airbnb1.dto.LoginDto;
 import com.airbnb1.dto.PropertyUserDto;
+import com.airbnb1.dto.TokenResponse;
 import com.airbnb1.entity.PropertyUser;
 import com.airbnb1.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -29,14 +30,20 @@ public class UserController {
         return new ResponseEntity<>("Something went Wrong ", HttpStatus.INTERNAL_SERVER_ERROR);
     }
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto){
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto){//response is here for two different type then put (?),it means method can return any kind of value
         String token = userService.verifyLogin(loginDto);
         if (token!=null) {
-            return new ResponseEntity<>( token,HttpStatus.OK);
+            // i create here tokenResponse Payload
+            TokenResponse tokenResponse = new TokenResponse();
+            tokenResponse.setToken(token);
+            return new ResponseEntity<>( tokenResponse,HttpStatus.OK);//not send back the token in String like that String token = userService.verifyLogin(loginDto);
         }
-        return new ResponseEntity<>("in valid credentials ",HttpStatus.UNAUTHORIZED);
-    }
-//Note-After return a token 2nd time at subsequent request that i make it should first validate a token and only then process the request how do we do this now
+        return new ResponseEntity<>("In valid credentials ",HttpStatus.UNAUTHORIZED);
+        //Note-After return a token 2nd time at subsequent request that i make it should first validate a token and only then process the request how do we do this now
 //four thing-algorithm,secrets key, issuers key and expiry time.
+    }
+//how do you know which current user has been logged in.i want a current get logged user Profile
+
+
 }
 
