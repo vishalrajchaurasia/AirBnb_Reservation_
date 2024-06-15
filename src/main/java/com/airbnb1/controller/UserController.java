@@ -7,10 +7,8 @@ import com.airbnb1.entity.PropertyUser;
 import com.airbnb1.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -43,6 +41,10 @@ public class UserController {
 //four thing-algorithm,secrets key, issuers key and expiry time.
     }
 //how do you know which current user has been logged in.i want a current get logged user Profile
+    @GetMapping("/profile")
+    public PropertyUser getCurrentUserProfile(@AuthenticationPrincipal PropertyUser user) {
+        return user;
+    }
 
 
 }
