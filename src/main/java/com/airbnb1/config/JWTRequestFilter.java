@@ -37,16 +37,9 @@ public class JWTRequestFilter extends OncePerRequestFilter {//this abstract clas
             String username = jwtService.getUserName(token);//take this username into this variable
             Optional<PropertyUser> opUser = userRepository.findByUsername(username);//and get Optional USer
             if(opUser.isPresent()){
-                PropertyUser user = opUser.get();//convert to entity class
-                //i will now create for session variables because which user is logged in this is decided by the seesion
-                //the session will simply generate unique id per user
-
-                //what does three line does To keep track of current user logged in
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user,null,new ArrayList<>());
-                //principal is session information and give complete user information
-                //credentials which is not required give it null
-                //authorities is important that is role
-                authentication.setDetails(new WebAuthenticationDetails(request));//use of line of code to creating a session
+                PropertyUser user = opUser.get();
+                UsernamePasswordAuthenticationToken authentication  = new UsernamePasswordAuthenticationToken(user,null,new ArrayList<>());
+                authentication.setDetails(new WebAuthenticationDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
