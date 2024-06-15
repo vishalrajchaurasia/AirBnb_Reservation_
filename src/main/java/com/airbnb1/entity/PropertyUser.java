@@ -1,5 +1,6 @@
 package com.airbnb1.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,10 +22,10 @@ public class PropertyUser {
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
-
+    @JsonIgnore //it is not show password in JSON by using this annotation @JSONIgnore
     @Column(name = "password", nullable = false, length = 200)
     private String password;
-
+    @JsonIgnore
     @Column(name = "user_role", nullable = false, length = 20)
     private String userRole;//how do control your url access based on control
 
