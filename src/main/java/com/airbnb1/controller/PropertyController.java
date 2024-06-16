@@ -21,7 +21,7 @@ public class PropertyController {
         this.propertyRepository = propertyRepository;
     }
 
-    @GetMapping("${locationName}")
+    @GetMapping("{locationName}")
     public ResponseEntity<List<Property>> findProperty(@PathVariable String locationName){
         List<Property> properties = propertyRepository.findPropertyByLocation(locationName);
         return new ResponseEntity<>(properties, HttpStatus.OK);
