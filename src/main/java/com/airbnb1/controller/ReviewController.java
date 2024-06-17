@@ -27,7 +27,7 @@ public class ReviewController {
         this.propertyRepository = propertyRepository;
     }
 
-    @PostMapping("/{propertyId}")
+    @PostMapping("/addReview/{propertyId}")
     public ResponseEntity<String> addReview(
             @PathVariable long propertyId,//property id is come from URL
             @RequestBody Review review,//review is come from ReviewDto
