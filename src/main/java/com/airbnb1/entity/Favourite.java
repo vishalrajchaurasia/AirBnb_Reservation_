@@ -13,6 +13,30 @@ public class Favourite {
     @Column(name = "is_favourite", nullable = false)
     private Boolean isFavourite = false;
 
+    @ManyToOne
+    @JoinColumn(name = "property_user_id")
+    private PropertyUser propertyUser;
+
+    @ManyToOne
+    @JoinColumn(name = "property_id")
+    private Property property;
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    public PropertyUser getPropertyUser() {
+        return propertyUser;
+    }
+
+    public void setPropertyUser(PropertyUser propertyUser) {
+        this.propertyUser = propertyUser;
+    }
+
     public Boolean getIsFavourite() {
         return isFavourite;
     }
