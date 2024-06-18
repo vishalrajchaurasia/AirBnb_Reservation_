@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -47,5 +48,11 @@ public class ReviewController {
 
         reviewRepository.save(review);
         return new ResponseEntity<>("Review added successfully", HttpStatus.OK);
+    }
+    @GetMapping("/userReviews")
+    public ResponseEntity<List<Review>> getUserReviews(@AuthenticationPrincipal PropertyUser user){
+        List<Review> reviews = reviewRepository.findByPropertyUser(user);
+        return new ResponseEntity<>(reviews,HttpStatus.OK);
+
     }
 }
