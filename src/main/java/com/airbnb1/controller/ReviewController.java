@@ -33,13 +33,15 @@ public class ReviewController {
             @RequestBody Review review,//review is come from ReviewDto
             @AuthenticationPrincipal PropertyUser user //user is given the review for particular a particular property //it is automatically fetch the details user currently logged in
     ){//current user logged in will give the review i can find the current user used in @AuthenticationPrincipal
-        Review r= reviewRepository.findReviewByUserIdAndPropertyId(propertyId, user.getId());
-        if(r!=null){
-            return new ResponseEntity<>("You have already reviewed this property", HttpStatus.BAD_REQUEST);
-        }
+
 
         Optional<Property> opProperty = propertyRepository.findById(propertyId);
         Property property = opProperty.get();
+        Review r = reviewRepository.findReviewByUser(property, user);
+        if(r!=null){
+            return new ResponseEntity<>("You have already added a review for this property", HttpStatus.BAD_REQUEST);
+        }
+
         review.setProperty(property);
         review.setPropertyUser(user);
 
