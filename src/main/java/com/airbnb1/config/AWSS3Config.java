@@ -31,5 +31,6 @@ public class AWSS3Config {
                 .withCredentials(new AWSStaticCredentialsProvider(credentials()))
                 .withRegion(region) // Added this line to specify the region
                 .build(); // Corrected this line to properly build the AmazonS3 client
+
     }
 }
