@@ -1,5 +1,5 @@
 package com.airbnb1.controller;
-import com.s3example1.service.BucketService;
+import com.airbnb1.service.BucketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("s3bucket")
-@CrossOrigin("*")//CroossOrigin is access API in angular
+@CrossOrigin("*")//CroossOrigin is access API in angular ,this is from anywhere use it
 public class BucketController {//this is not a BucketController its a imageBucketController
 
     @Autowired
@@ -20,4 +20,6 @@ public class BucketController {//this is not a BucketController its a imageBucke
                                              @PathVariable String bucketName) {
         return new ResponseEntity<>(service.uploadFile(file,bucketName), HttpStatus.OK);
     }
+
+
 }
