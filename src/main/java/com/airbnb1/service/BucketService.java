@@ -22,8 +22,8 @@ public class BucketService {
             File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + file.getOriginalFilename());//this is our file concept this is java concept
             file.transferTo(convFile);//this method is convert file to some binary,  and it is copy from local system
             try {
-                amazonS3.putObject(bucketName, convFile.getName(), convFile);
-                return amazonS3.getUrl(bucketName, file.getOriginalFilename()).toString();
+                amazonS3.putObject(bucketName, convFile.getName(), convFile);//this is upload a file in to a AWS
+                return amazonS3.getUrl(bucketName, file.getOriginalFilename()).toString();//and this is return back to object URL ,file is uploaded and get this url
             } catch (AmazonS3Exception s3Exception) {
                 return "Unable to upload file :" + s3Exception.getMessage();
             }
