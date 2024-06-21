@@ -29,9 +29,9 @@ public class BucketService {
             }
 
 
-
         } catch (Exception e) {
             throw new IllegalStateException("Failed to upload file", e);
         }
 
     }
+}
