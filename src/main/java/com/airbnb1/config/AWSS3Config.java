@@ -13,8 +13,8 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 @Configuration
 public class AWSS3Config {
 
-    @Value("${accessKey}")
-    private String accessKey;
+    @Value("${accessKey}") //read access key from property file
+    private String accessKey;//read and anlyse the variable
 
     @Value("${secretKey}")
     private String secretKey;
@@ -32,6 +32,6 @@ public class AWSS3Config {
 
         AmazonS3 s3client = AmazonS3ClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials())).withRegion(region).build();
-        return s3client;
+        return s3client; //its helps us to login the AWS account
     }
 }
