@@ -21,5 +21,9 @@ public class BucketController {//this is not a BucketController its a imageBucke
         return new ResponseEntity<>(service.uploadFile(file,bucketName), HttpStatus.OK);
     }
 
-
+//@DeleteMapping(path="/delete/file/{bucketName}/{fileName}")
+//public ResponseEntity<String> deleteFile(@PathVariable String bucketName,@PathVariable String fileName)
+//{
+//    return new ResponseEntity<>(service.deleteFile(bucketName,fileName),HttpStatus.OK);
+//}
 }
