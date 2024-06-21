@@ -32,6 +32,6 @@ public class AWSS3Config {
 
         AmazonS3 s3client = AmazonS3ClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials())).withRegion(region).build();
-        return s3client; //its helps us to login the AWS account
+        return s3client; //its helps us to login the AWS account // this is standard code to login the AWS account
     }
 }
