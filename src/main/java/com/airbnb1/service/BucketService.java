@@ -14,13 +14,13 @@ public class BucketService {
     @Autowired
     private AmazonS3 amazonS3;
 
-    public String uploadFile(MultipartFile file, String bucketName) {
-        if (file.isEmpty()) {
-            throw new IllegalStateException("Cannot upload empty file");
+    public String uploadFile(MultipartFile file, String bucketName) {//this MultipartFile is standard procedure to upload a file
+        if (file.isEmpty()) {//the datatype of the variable is multipart when you upload any file
+            throw new IllegalStateException("Cannot upload empty file");//if the file is empty it give this exception
         }
         try {
-            File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + file.getOriginalFilename());
-            file.transferTo(convFile);
+            File convFile = new File(System.getProperty("java.io.tmpdir") + "/" + file.getOriginalFilename());//this is our file concept this is java concept
+            file.transferTo(convFile);//this method is convert file to some binary,  and it is copy from local system
             try {
                 amazonS3.putObject(bucketName, convFile.getName(), convFile);
                 return amazonS3.getUrl(bucketName, file.getOriginalFilename()).toString();
@@ -34,4 +34,9 @@ public class BucketService {
         }
 
     }
+    //Deleted method
+    // public String deleteBucket(String bucketName) {
+//        amazonS3.deleteBucket(bucketName);
+//        return "File is deleted";
+//    }
 }
