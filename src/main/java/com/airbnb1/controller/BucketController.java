@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("s3bucket")
-@CrossOrigin("*")//CroossOrigin is access API in angular ,this is from anywhere use it
+@CrossOrigin("*")//CrossOrigin is access API in angular ,this is from anywhere use it
 public class BucketController {//this is not a BucketController its a imageBucketController
 
     @Autowired
