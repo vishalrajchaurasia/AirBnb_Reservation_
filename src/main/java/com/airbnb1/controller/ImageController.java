@@ -15,9 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/images")
-public class ImageController {
+public class ImageController {//once the image is uploaded we should get the URL and save in to the database.
     private ImagesRepository imagesRepository;
     //now when you upload a images and you also have supply the property id no.
+    //you can also supply the nested object or the property  id no.
     private PropertyRepository propertyRepository;
     private BucketService bucketService;
 
@@ -31,12 +32,12 @@ public class ImageController {
     public ResponseEntity<?> uploadFile(@RequestParam MultipartFile file,
                                              @PathVariable String bucketName,
                                              @PathVariable long propertyId,
-                                             @AuthenticationPrincipal PropertyUser user
+                                             @AuthenticationPrincipal PropertyUser user//this will give a user details who uploaded a images.
 
     ) {
         String imageUrl = bucketService.uploadFile(file, bucketName);//this will help me upload a images
         Property property = propertyRepository.findById(propertyId).get();
-        Images img = new Images();
+        Images img = new Images();//that is our entity class name
         img.setImageUrl(imageUrl);
         img.setProperty(property);
         img.setPropertyUser(user);
