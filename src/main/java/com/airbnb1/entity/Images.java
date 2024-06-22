@@ -15,7 +15,7 @@ public class Images {
 
     @ManyToOne
     @JoinColumn(name = "property_id")
-    private Property property;
+    private Property property; //one property have several images
 
     @ManyToOne
     @JoinColumn(name = "property_user_id")
