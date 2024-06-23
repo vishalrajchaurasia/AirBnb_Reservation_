@@ -24,6 +24,17 @@ public class Booking {
     @Column(name = "guest_name", nullable = false)
     private String guestName;
 
+    @Column(name = "total_nights", nullable = false)
+    private Integer totalNights;
+
+    public Integer getTotalNights() {
+        return totalNights;
+    }
+
+    public void setTotalNights(Integer totalNights) {
+        this.totalNights = totalNights;
+    }
+
     public String getGuestName() {
         return guestName;
     }
