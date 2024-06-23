@@ -21,17 +21,17 @@ public class BookingController {
         this.propertyRepository = propertyRepository;
     }
     @PostMapping("/createBooking/{propertyId}")
-    public ResponseEntity<Booking> createBooking(
+    public ResponseEntity<Booking> createBooking( //of the type <Booking>, this will automatically return back user details,propertyDetails and the booking deatils
             @RequestBody Booking booking,//in this case booking details itself be capture the property details
             @AuthenticationPrincipal PropertyUser user,
             @PathVariable long propertyId
 
             ){
         booking.setPropertyUser(user);
-//        //Property property = booking.getProperty();//what will do line it go to the booking class it will help me the get the property object address supply here @RequestBody Booking booking
-//       // Long propertyId = property.getId();
-//       // Property completePropertyInfo = propertyRepository.findById(propertyId).get();
-//       // Booking createdBooking = bookingRepository.save(booking);
+//        Property property = booking.getProperty();//what will do line it go to the booking class it will help me the get the property object address supply here @RequestBody Booking booking
+//        Long propertyId = property.getId();
+//        Property completePropertyInfo = propertyRepository.findById(propertyId).get();
+//        Booking createdBooking = bookingRepository.save(booking);
         Property property = propertyRepository.findById(propertyId).get();
         int propertyPrice = property.getNightlyPrice();
         int totalNights = booking.getTotalNights();
