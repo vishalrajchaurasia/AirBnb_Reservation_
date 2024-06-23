@@ -11,7 +11,7 @@ public class Booking {
     private Long id;
 
     @Column(name = "total_price")
-    private Integer totalPrice;
+    private Integer totalPrice;//now save total price in the database and depending on the no. night staying that.
 
     @ManyToOne
     @JoinColumn(name = "property_user_id")
