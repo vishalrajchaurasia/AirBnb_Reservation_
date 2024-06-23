@@ -5,6 +5,7 @@ import com.airbnb1.entity.Property;
 import com.airbnb1.entity.PropertyUser;
 import com.airbnb1.repository.BookingRepository;
 import com.airbnb1.repository.PropertyRepository;
+import com.airbnb1.service.PDFService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.*;
 public class BookingController {
     private BookingRepository bookingRepository;
     private PropertyRepository propertyRepository;//because i want a property price
+    private PDFService pdfService;
 
-    public BookingController(BookingRepository bookingRepository, PropertyRepository propertyRepository) {
+    public BookingController(BookingRepository bookingRepository, PropertyRepository propertyRepository, PDFService pdfService) {
         this.bookingRepository = bookingRepository;
         this.propertyRepository = propertyRepository;
+        this.pdfService = pdfService;
     }
     @PostMapping("/createBooking/{propertyId}")
     public ResponseEntity<Booking> createBooking( //of the type <Booking>, this will automatically return back user details,propertyDetails and the booking deatils
@@ -44,5 +47,9 @@ public class BookingController {
         //create PDF with Booking confirmation
 
         return new ResponseEntity<>(createdBooking, HttpStatus.CREATED);
+    }
+    @PostMapping("/createPdf")
+    public void createPdf(){
+        pdfService.generatePDF();
     }
 }
