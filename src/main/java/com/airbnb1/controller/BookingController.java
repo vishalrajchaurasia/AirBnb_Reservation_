@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/booking")
 public class BookingController {
     private BookingRepository bookingRepository;
-    private PropertyRepository propertyRepository;
+    private PropertyRepository propertyRepository;//because i want a property price
 
     public BookingController(BookingRepository bookingRepository, PropertyRepository propertyRepository) {
         this.bookingRepository = bookingRepository;
@@ -31,8 +31,8 @@ public class BookingController {
 //        Property property = booking.getProperty();//what will do line it go to the booking class it will help me the get the property object address supply here @RequestBody Booking booking
 //        Long propertyId = property.getId();
 //        Property completePropertyInfo = propertyRepository.findById(propertyId).get();
-//        Booking createdBooking = bookingRepository.save(booking);
-        Property property = propertyRepository.findById(propertyId).get();
+//        Booking createdBooking = bookingRepository.save(booking); //this is the one way of doing it for above four lines.
+        Property property = propertyRepository.findById(propertyId).get();// this another way of doing // you got the property id findById(propertyId)
         int propertyPrice = property.getNightlyPrice();
         int totalNights = booking.getTotalNights();
         int totalPrice = propertyPrice * totalNights;
