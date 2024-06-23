@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "booking")
-public class Booking {
+public class Booking {//this booking will hold the address of the object which is called property
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -19,7 +19,7 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "property_id")
-    private Property property;
+    private Property property; //in the booking object only i can create a sub-object in side that and nested object that called as property
 
     @Column(name = "guest_name", nullable = false)
     private String guestName;
