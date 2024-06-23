@@ -39,6 +39,10 @@ public class BookingController {
         booking.setProperty(property);
         booking.setTotalPrice(totalPrice);
         Booking createdBooking = bookingRepository.save(booking);
+
+        //ONCE A booking is done
+        //create PDF with Booking confirmation
+
         return new ResponseEntity<>(createdBooking, HttpStatus.CREATED);
     }
 }
