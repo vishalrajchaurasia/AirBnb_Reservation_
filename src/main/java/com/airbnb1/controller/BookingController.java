@@ -1,5 +1,6 @@
 package com.airbnb1.controller;
 
+import com.airbnb1.dto.BookingDto;
 import com.airbnb1.entity.Booking;
 import com.airbnb1.entity.Property;
 import com.airbnb1.entity.PropertyUser;
@@ -42,9 +43,15 @@ public class BookingController {
         booking.setProperty(property);
         booking.setTotalPrice(totalPrice);
         Booking createdBooking = bookingRepository.save(booking);
+
+        BookingDto dto= new BookingDto();
+        dto.setBookingId(createdBooking.getId());
+        dto.setGuestName(createdBooking.getGuestName());
+        dto.setPrice(propertyPrice);//now price is coming from propertyPrice object
+        dto.setTotalPrice(createdBooking.getTotalPrice());
         //after booking confirmation i call that here //ONCE A booking is done
         //create PDF with Booking confirmation
-        pdfService.generatePDF("C://air_bnb_reservation 1//"+"booking-confirmation-id"+createdBooking.getId()+".pdf");//this is became a fileName
+        pdfService.generatePDF("C://air_bnb_reservation 1//"+"booking-confirmation-id"+createdBooking.getId()+".pdf",dto);//this is became a fileName
 
 
         return new ResponseEntity<>(createdBooking, HttpStatus.CREATED);
