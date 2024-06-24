@@ -73,7 +73,8 @@ public class BookingController {
             MultipartFile file = BookingController.convert("C://air_bnb_reservation 1//" + "booking-confirmation-id" + createdBooking.getId() + ".pdf");
             String uploadedFileUrl = bucketService.uploadFile(file, "myairbnb4");//now file will upload into bucket means AWS s3 bucket
             //System.out.println(uploadedFileUrl);//this is give the AWS s3 bucket to upload url
-            smsService.sendSms("+917348120128","Your Booking is Confirmed.Clicked for More Information:"+uploadedFileUrl);
+            smsService.sendSms("+917348120120","Test");
+            //smsService.sendSms("+917348120120","Your Booking is Confirmed.Clicked for More Information:"+uploadedFileUrl);
         }else {
             return new ResponseEntity<>("Something went Wrong ",HttpStatus.INTERNAL_SERVER_ERROR);
         }
