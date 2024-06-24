@@ -42,14 +42,12 @@ public class BookingController {
         booking.setProperty(property);
         booking.setTotalPrice(totalPrice);
         Booking createdBooking = bookingRepository.save(booking);
-
-        //ONCE A booking is done
+        //after booking confirmation i call that here //ONCE A booking is done
         //create PDF with Booking confirmation
+        pdfService.generatePDF("C://air_bnb_reservation 1//"+"booking-confirmation-id"+createdBooking.getId()+".pdf");//this is became a fileName
+
 
         return new ResponseEntity<>(createdBooking, HttpStatus.CREATED);
     }
-    @PostMapping("/createPdf")
-    public void createPdf(){
-        pdfService.generatePDF();
-    }
+
 }
