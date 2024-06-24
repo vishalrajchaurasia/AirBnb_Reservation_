@@ -8,8 +8,8 @@ import com.airbnb1.repository.BookingRepository;
 import com.airbnb1.repository.PropertyRepository;
 import com.airbnb1.service.BucketService;
 import com.airbnb1.service.PDFService;
+import com.airbnb1.service.SmsService;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,12 +31,14 @@ public class BookingController {
     private PropertyRepository propertyRepository;//because i want a property price
     private PDFService pdfService;
     private BucketService bucketService;
+    private SmsService smsService;
 
-    public BookingController(BookingRepository bookingRepository, PropertyRepository propertyRepository, PDFService pdfService, BucketService bucketService) {
+    public BookingController(BookingRepository bookingRepository, PropertyRepository propertyRepository, PDFService pdfService, BucketService bucketService, SmsService smsService) {
         this.bookingRepository = bookingRepository;
         this.propertyRepository = propertyRepository;
         this.pdfService = pdfService;
         this.bucketService = bucketService;
+        this.smsService = smsService;
     }
     @PostMapping("/createBooking/{propertyId}")
     public ResponseEntity<?> createBooking( //of the type <Booking>, this will automatically return back user details,propertyDetails and the booking deatils
@@ -70,7 +72,8 @@ public class BookingController {
             //Upload your file into bucket
             MultipartFile file = BookingController.convert("C://air_bnb_reservation 1//" + "booking-confirmation-id" + createdBooking.getId() + ".pdf");
             String uploadedFileUrl = bucketService.uploadFile(file, "myairbnb4");//now file will upload into bucket means AWS s3 bucket
-            System.out.println(uploadedFileUrl);//this is give the AWS s3 bucket to upload url
+            //System.out.println(uploadedFileUrl);//this is give the AWS s3 bucket to upload url
+            smsService.sendSms("+917348120128","Your Booking is Confirmed.Clicked for More Information:"+uploadedFileUrl);
         }else {
             return new ResponseEntity<>("Something went Wrong ",HttpStatus.INTERNAL_SERVER_ERROR);
         }
