@@ -24,9 +24,13 @@ public class PDFService {
             Chunk totalPrice = new Chunk("Total Price"+dto.getTotalPrice(), font);
 
             document.add(bookingConfirmation);
+            document.add(new Paragraph("/n"));
             document.add(guestName);
+            document.add(new Paragraph("/n"));
             document.add(price);
+            document.add(new Paragraph("/n"));
             document.add(totalPrice);
+
 
             document.close();
         }
