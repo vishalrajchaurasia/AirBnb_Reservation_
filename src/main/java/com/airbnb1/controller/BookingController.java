@@ -69,7 +69,8 @@ public class BookingController {
         if(b){
             //Upload your file into bucket
             MultipartFile file = BookingController.convert("C://air_bnb_reservation 1//" + "booking-confirmation-id" + createdBooking.getId() + ".pdf");
-            bucketService.uploadFile(file,"myairbnb4");//now file will upload into bucket means AWS s3 bucket
+            String uploadedFileUrl = bucketService.uploadFile(file, "myairbnb4");//now file will upload into bucket means AWS s3 bucket
+            System.out.println(uploadedFileUrl);//this is give the AWS s3 bucket to upload url
         }else {
             return new ResponseEntity<>("Something went Wrong ",HttpStatus.INTERNAL_SERVER_ERROR);
         }
