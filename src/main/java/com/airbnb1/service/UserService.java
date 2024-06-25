@@ -29,7 +29,7 @@ public class UserService {
         user.setPassword(BCrypt.hashpw(propertyUserDto.getPassword(),BCrypt.gensalt(10)));//here is were set the password in the object should be encrypted there are two way to do it
         //this is one way of encoding with password or what i can do use this new BCryptPasswordEncoder().encode(user.getPassword())
         // what does BCrypt.gensalt(10) this will create a 10 rounds of encryption
-        user.setUserRole(propertyUserDto.getUserRole());
+        user.setUserRole("ROLE_USER");
         PropertyUser savedUser = userRepository.save(user);
         return savedUser;
     }
