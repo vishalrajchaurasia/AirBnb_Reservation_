@@ -36,7 +36,7 @@ public class UserController {
             tokenResponse.setToken(token);
             return new ResponseEntity<>( tokenResponse,HttpStatus.OK);//not send back the token in String like that String token = userService.verifyLogin(loginDto);
         }
-        return new ResponseEntity<>("In valid credentials ",HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>("Invalid credentials ",HttpStatus.UNAUTHORIZED);
         //Note-After return a token 2nd time at subsequent request that i make it should first validate a token and only then process the request how do we do this now
 //four thing-algorithm,secrets key, issuers key and expiry time.
     }
