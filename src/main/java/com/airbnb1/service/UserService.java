@@ -34,11 +34,11 @@ public class UserService {
         return savedUser;
     }
 
-    public String verifyLogin(LoginDto loginDto) {//actual value get from database//this is coming from user
+    public String verifyLogin(LoginDto loginDto) {//actual value get from database//loginDto this is coming from user
         Optional<PropertyUser> opUser =userRepository.findByUsername(loginDto.getUserName());
         // weather the record is found or not if record is found then data present in it opUser,if not found it will be null.
         if(opUser.isPresent()){//here avoid the null pointer exception is handle now//
-            PropertyUser propertyUser = opUser.get(); //this is coming from database//what is the get() method do it is convert opUser to enity object(propertyUser)
+            PropertyUser propertyUser = opUser.get(); //PropertyUser propertyUser-this is coming from database//what is the get() method do it is convert opUser to enity object(propertyUser)
             if(BCrypt.checkpw(loginDto.getPassword(),propertyUser.getPassword())){//this check password return boolean value
                 return jwtService.generateToken(propertyUser);//loginDto.getPassword() is get the raw password //propertyUser.getPassword() is get the encrypted password
             }
