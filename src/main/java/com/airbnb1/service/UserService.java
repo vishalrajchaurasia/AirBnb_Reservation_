@@ -41,7 +41,7 @@ public class UserService {
             PropertyUser propertyUser = opUser.get(); //PropertyUser propertyUser-this is coming from database//what is the get() method do it is convert opUser to enity object(propertyUser)
             if(BCrypt.checkpw(loginDto.getPassword(),propertyUser.getPassword())){//this check password return boolean value
                 return jwtService.generateToken(propertyUser);//loginDto.getPassword() is get the raw password //propertyUser.getPassword() is get the encrypted password
-            }
+            }// if password is valid to generate token
         }
         return null;
 
