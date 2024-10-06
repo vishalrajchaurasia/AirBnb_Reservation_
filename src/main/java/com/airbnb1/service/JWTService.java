@@ -35,7 +35,7 @@ public class JWTService {
                 .withExpiresAt(new Date(System.currentTimeMillis()+expiryTime))
                 .withIssuer(issuer)
                 .sign(algorithm); //algorithm+secret key both come here
-    }
+    }//this above line build the token
     public String getUserName(String token){
         DecodedJWT decodedJWT =JWT.require(algorithm).withIssuer(issuer).build().verify(token);
         return decodedJWT.getClaim(USER_NAME).asString();
