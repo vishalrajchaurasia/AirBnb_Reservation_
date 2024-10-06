@@ -30,7 +30,7 @@ public class JWTRequestFilter extends OncePerRequestFilter {//this abstract clas
         this.userRepository = userRepository;
     }
 
-    @Override
+    @Override //subsequent HTTP request come to this method first
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //all the incoming request access with automatically
         String tokenHeader = request.getHeader("Authorization");//is not just a token i call that tokenHeader is bearer_token this is 64bit encoded token
