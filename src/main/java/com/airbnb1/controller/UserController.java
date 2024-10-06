@@ -43,6 +43,7 @@ public class UserController {
 //how do you know which current user has been logged in.i want a current get logged user Profile
     @GetMapping("/profile") //I have here profile URL which an admin and USER both they should be able to access
     public PropertyUser getCurrentUserProfile(@AuthenticationPrincipal PropertyUser user) {
+
         return user;
     }
 
