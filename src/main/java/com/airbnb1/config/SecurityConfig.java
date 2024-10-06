@@ -19,7 +19,8 @@ public class SecurityConfig {//why used that because we open the Url
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf().disable().cors().disable();//this will work 3.0.0 version of spring security
-        http.addFilterBefore(jwtRequestFilter, AuthorizationFilter.class);//when we run the file config file will automatically run//it will run our custom filter method first
+        http.addFilterBefore(jwtRequestFilter, AuthorizationFilter.class);//when we run the file config file will automatically run
+        // it will run our custom filter method first
         //where is custom filter method is public class JWTRequestFilter extends OncePerRequestFilter
         http.authorizeHttpRequests().anyRequest().permitAll();
 //        requestMatchers("/api/v1/users/addUser","/api/v1/users/login").permitAll()//this url every one can access//using java 8 remove request and replace with antMathcer
