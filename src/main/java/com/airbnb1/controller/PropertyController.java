@@ -18,6 +18,7 @@ public class PropertyController {
     private PropertyRepository propertyRepository;
 
     public PropertyController(PropertyRepository propertyRepository) {
+
         this.propertyRepository = propertyRepository;
     }
 
