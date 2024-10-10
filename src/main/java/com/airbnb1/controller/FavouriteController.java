@@ -23,7 +23,7 @@ public class FavouriteController {// i will not supply the property id in the UR
     @PostMapping
     public ResponseEntity<Favourite> addFavourite(
             @RequestBody Favourite favourite,
-            @AuthenticationPrincipal PropertyUser user //this will take a current session
+            @AuthenticationPrincipal PropertyUser user //we know that which user is actually setting the value true //this will take a current session
             ){
         favourite.setPropertyUser(user);
         Favourite savedFavourite = favouriteRepository.save(favourite);//before i save the favourite on thing user object need to be set
