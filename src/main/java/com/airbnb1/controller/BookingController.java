@@ -59,7 +59,7 @@ public class BookingController {
         booking.setProperty(property);
         booking.setTotalPrice(totalPrice);
 
-        Booking createdBooking = bookingRepository.save(booking);
+        Booking createdBooking = bookingRepository.save(booking);//booking is created
 
         BookingDto dto= new BookingDto();
         dto.setBookingId(createdBooking.getId());
