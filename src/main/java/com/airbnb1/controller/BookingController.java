@@ -58,6 +58,7 @@ public class BookingController {
         int totalPrice = propertyPrice * totalNights;
         booking.setProperty(property);
         booking.setTotalPrice(totalPrice);
+
         Booking createdBooking = bookingRepository.save(booking);
 
         BookingDto dto= new BookingDto();
